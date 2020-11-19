@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
-import { ClicksCollection } from '/imports/api/ClicksCollection';
+import { Clicks } from '/imports/api/clicks';
 import { LinksCollection } from '/imports/api/links';
 
 Meteor.startup(() => {
-  if (ClicksCollection.find().count() === 0) {
-      ClicksCollection.insert({totalClicks : 0});
+  if (Clicks.find().count() === 0) {
+      Clicks.insert({totalClicks : 0});
     }
 });

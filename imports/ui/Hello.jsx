@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { ClicksCollection } from '/imports/api/ClicksCollection';
+import { Clicks } from '/imports/api/clicks';
 
 export const Hello = () => {
-  const clicks = useTracker(() => ClicksCollection.find({}).fetch());
+  const clicks = useTracker(() => Clicks.find({}).fetch());
 
   const [counter, setCounter] = useState(0);
 
@@ -17,7 +17,7 @@ export const Hello = () => {
   };
 
   function incrementTotal() {
-    ClicksCollection.update(clicks[0]._id, { $inc: { totalClicks: 1 } });
+     Meteor.call('clicks.increment', clicks[0]._id, clicks.map(click => click.totalClicks));
   };
 
   return (
